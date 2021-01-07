@@ -106,7 +106,7 @@ public static TextChannel tc;
         this.handler.registerCommand(new delchannel());
         this.handler.registerCommand(new Help());
 
-//handler.registerCommand(new schmutz());
+
 handler.registerCommand(new devCMD());
 handler.registerCommand(new stream());
         this.handler.registerCommand(new ClearCommand());
