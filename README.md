@@ -1,0 +1,2 @@
+# PsychatrieBot
+ DiscordBot

@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Implimentation-Title: BotBase2
+Main-Class: de.steallight.testbot.main.TestBot
+
