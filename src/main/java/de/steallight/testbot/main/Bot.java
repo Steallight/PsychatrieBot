@@ -45,10 +45,6 @@ public static TextChannel tc;
         twitchClient.getClientHelper().enableStreamEventListener("steallight");
 
 
-
-        LiteSQL.connect();
-        SQLManager.onCreate();
-
         shardMan = DefaultShardManagerBuilder.createDefault(CodeStorage.BotToken,
                 GatewayIntent.GUILD_MESSAGES,
                 GatewayIntent.DIRECT_MESSAGES,

@@ -1,6 +1,5 @@
 package de.steallight.testbot.listener;
 
-import de.steallight.testbot.main.LiteSQL;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
