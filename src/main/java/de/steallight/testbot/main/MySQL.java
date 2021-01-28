@@ -5,9 +5,9 @@ import java.sql.*;
 public class MySQL {
     public static String host = "176.9.181.228";
     public static String port = "3306";
-    public static String database = "MCU";
-    public static String username = "mcu";
-    public static String password = "Xi6!9vr4";
+    public static String database = "Test";
+    public static String username = "newBot";
+    public static String password = "F^h8f2e2";
     public static Connection con;
 
 
