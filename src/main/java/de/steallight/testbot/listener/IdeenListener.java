@@ -1,20 +1,16 @@
 package de.steallight.testbot.listener;
 
 import de.steallight.testbot.main.Bot;
-import feign.Client;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.entities.PrivateChannel;
+import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
-import java.util.List;
 import java.util.Objects;
-import java.util.Queue;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Consumer;
 
 public class IdeenListener extends ListenerAdapter {
 
@@ -22,6 +18,7 @@ public class IdeenListener extends ListenerAdapter {
 
     @Override
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
+
 
         User member = e.getMessage().getAuthor();
         if (e.getChannel().getId().equals("780067626486857750")) {
@@ -38,9 +35,10 @@ public class IdeenListener extends ListenerAdapter {
     }
 
     public void onGuildMessageReactionAdd(GuildMessageReactionAddEvent e) {
+        TextChannel tc = Bot.shardMan.getTextChannelById("780156140658622474");
 
 
-   PrivateChannel pc = e.getJDA().openPrivateChannelById("438200912599580675").complete();
+        PrivateChannel pc = e.getJDA().openPrivateChannelById("438200912599580675").complete();
 
         if (e.getChannel().getId().equals("780067626486857750")) {
 
@@ -48,9 +46,22 @@ public class IdeenListener extends ListenerAdapter {
 
                 e.getChannel().retrieveMessageById(e.getMessageId()).queue(message -> {
                     message.retrieveReactionUsers("\u274C").queue(users -> {
-                                if (!e.getMember().getRoles().contains(e.getGuild().getRoleById("780067930359988246"))) {
-                                    if (users.size() >= 4) {
+                                if (!message.getAttachments().get(0).isImage()) {
+                                    if (!e.getMember().getRoles().contains(e.getGuild().getRoleById("780067930359988246"))) {
+                                        if (users.size() >= 4) {
 
+                                            EmbedBuilder ebTo = new EmbedBuilder();
+                                            ebTo.setTitle("Deine Idee wurde leider abgelehnt!");
+                                            ebTo.setColor(Color.RED);
+
+                                            message.getAuthor().openPrivateChannel().queue(sendto -> {
+                                                sendto.sendMessage(ebTo.build()).queue();
+                                            });
+                                            message.delete().queue();
+                                        }
+
+
+                                    } else {
                                         EmbedBuilder ebTo = new EmbedBuilder();
                                         ebTo.setTitle("Deine Idee wurde leider abgelehnt!");
                                         ebTo.setColor(Color.RED);
@@ -58,19 +69,10 @@ public class IdeenListener extends ListenerAdapter {
                                         message.getAuthor().openPrivateChannel().queue(sendto -> {
                                             sendto.sendMessage(ebTo.build()).queue();
                                         });
+
                                         message.delete().queue();
                                     }
-
-
-                                }else {
-                                    EmbedBuilder ebTo = new EmbedBuilder();
-                                    ebTo.setTitle("Deine Idee wurde leider abgelehnt!");
-                                    ebTo.setColor(Color.RED);
-
-                                    message.getAuthor().openPrivateChannel().queue(sendto -> {
-                                        sendto.sendMessage(ebTo.build()).queue();
-                                    });
-
+                                } else {
                                     message.delete().queue();
                                 }
                             }
@@ -99,15 +101,11 @@ public class IdeenListener extends ListenerAdapter {
                                     ebTo.setTitle("Deine Idee liegt nun den Mod-Team vor!");
                                     ebTo.setColor(Color.green);
 
-message.getAuthor().openPrivateChannel().queue(sendto ->{
-    sendto.sendMessage(ebTo.build()).queue();
-});
-e.getJDA().getTextChannelById("780156140658622474").sendMessage(e.getGuild().getRoleById("780067930359988246").getAsMention() + "" + e.getGuild().getRoleById("780074754027159563").getAsMention()).queue();
-e.getJDA().getTextChannelById("780156140658622474").sendMessage(eb.build()).queue();
-
-
-
-
+                                    message.getAuthor().openPrivateChannel().queue(sendto -> {
+                                        sendto.sendMessage(ebTo.build()).queue();
+                                    });
+                                    e.getJDA().getTextChannelById("780156140658622474").sendMessage(e.getGuild().getRoleById("780067930359988246").getAsMention() + "" + e.getGuild().getRoleById("780074754027159563").getAsMention()).queue();
+                                    e.getJDA().getTextChannelById("780156140658622474").sendMessage(eb.build()).queue();
 
 
                                     message.delete().queue();
@@ -125,7 +123,8 @@ e.getJDA().getTextChannelById("780156140658622474").sendMessage(eb.build()).queu
 
 
         }
+        }
     }
-}
+
 
 

@@ -22,7 +22,7 @@ public class JoinListener extends ListenerAdapter {
         }
 
 
-        LiteSQL.onUpdate("INSERT INTO UserDataBase(name, memberid) VALUES('" + e.getMember().getEffectiveName() + "', '" + e.getMember().getId() + "')");
+//        LiteSQL.onUpdate("INSERT INTO UserDataBase(name, memberid) VALUES('" + e.getMember().getEffectiveName() + "', '" + e.getMember().getId() + "')");
 
 
     }
