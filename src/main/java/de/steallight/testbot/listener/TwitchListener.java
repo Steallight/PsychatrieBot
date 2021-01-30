@@ -3,32 +3,16 @@ package de.steallight.testbot.listener;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.twitch4j.TwitchClient;
-import com.github.twitch4j.common.events.TwitchEvent;
 import com.github.twitch4j.common.util.CryptoUtils;
 import com.github.twitch4j.events.ChannelGoLiveEvent;
 import com.github.twitch4j.events.ChannelGoOfflineEvent;
-import com.github.twitch4j.helix.domain.GameList;
 import com.github.twitch4j.helix.domain.UserList;
-import com.netflix.hystrix.HystrixCommand;
-import de.azraanimating.maddoxengine.handling.objects.MaddoxGuild;
 import de.steallight.testbot.main.Bot;
-import feign.Param;
-import javafx.scene.input.PickResult;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import net.dv8tion.jda.api.sharding.DefaultShardManager;
-import net.dv8tion.jda.api.sharding.ShardManager;
 
-import java.awt.image.ImageProducer;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -68,7 +52,7 @@ private String twitch = "https://twitch.tv/";
 
                 eb.setImage(event.getStream().getThumbnailUrl(1280, 720) + "?c=" + CryptoUtils.generateNonce(4));
 
-                eb.addField("Zuschauer", "" + event.getStream().getViewerCount(), true);
+                eb.addField("Game", "" + event.getStream().getGameName(), true);
 
 
 

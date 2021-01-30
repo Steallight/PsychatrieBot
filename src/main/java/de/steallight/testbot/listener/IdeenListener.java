@@ -46,7 +46,7 @@ public class IdeenListener extends ListenerAdapter {
 
                 e.getChannel().retrieveMessageById(e.getMessageId()).queue(message -> {
                     message.retrieveReactionUsers("\u274C").queue(users -> {
-                                if (!message.getAttachments().get(0).isImage()) {
+
                                     if (!e.getMember().getRoles().contains(e.getGuild().getRoleById("780067930359988246"))) {
                                         if (users.size() >= 4) {
 
@@ -72,14 +72,12 @@ public class IdeenListener extends ListenerAdapter {
 
                                         message.delete().queue();
                                     }
-                                } else {
-                                    message.delete().queue();
-                                }
+                    });
                             }
                     );
 
 
-                });
+            }
 
 
             } else if (e.getReaction().getReactionEmote().getName().equals("\u2705")) {
@@ -124,7 +122,7 @@ public class IdeenListener extends ListenerAdapter {
 
         }
         }
-    }
+
 
 
 
