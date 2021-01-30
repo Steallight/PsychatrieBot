@@ -22,16 +22,18 @@ import javax.security.auth.login.LoginException;
 public class Bot {
 
     public static AudioPlayerManager audioPlayerManager;
-
+    public static Bot INSTANCE;
     private Thread loop;
-    private ActivityManager activityManager;
+    private final ActivityManager activityManager;
     public static ShardManager shardMan;
 public static TextChannel tc;
     private final CommandHandler handler;
     public static TwitchClient twitchClient;
 
 
+
     public Bot() throws LoginException {
+        INSTANCE = this;
         this.handler = new CommandHandler();
         this.activityManager = new ActivityManager(this);
 
@@ -97,26 +99,28 @@ public static TextChannel tc;
 
         shardMan.addEventListener(new VoiceListener());
 
-     //   shardMan.addEventListener(new SupportListener());
+        shardMan.addEventListener(new MemberCounter());
+
+        //   shardMan.addEventListener(new SupportListener());
 
         this.handler.registerCommand(new delchannel());
         this.handler.registerCommand(new Help());
 
 
-handler.registerCommand(new devCMD());
-handler.registerCommand(new stream());
+        handler.registerCommand(new devCMD());
+        handler.registerCommand(new stream());
         this.handler.registerCommand(new ClearCommand());
         handler.registerCommand(new socials());
         handler.registerCommand(new PurgeCMD());
 
-      this.handler.registerCommand(new React());
+        this.handler.registerCommand(new React());
         this.handler.registerCommand(new Hi());
 
         this.handler.registerCommand(new Avatar());
         this.handler.registerCommand(new announceCMD());
         //this.handler.registerCommand(new PlayCommand(this));
         //this.handler.registerCommand(new StopCommand());
-handler.registerCommand(new membersizeCMD());
+
         this.activityManager.loadPresence();
         AudioSourceManagers.registerRemoteSources(audioPlayerManager);
         audioPlayerManager.getConfiguration().setFilterHotSwapEnabled(true);
