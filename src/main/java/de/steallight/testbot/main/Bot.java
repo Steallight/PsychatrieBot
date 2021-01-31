@@ -100,6 +100,7 @@ public static TextChannel tc;
         shardMan.addEventListener(new VoiceListener());
 
         shardMan.addEventListener(new MemberCounter());
+        shardMan.addEventListener(new LeaveLogger());
 
         //   shardMan.addEventListener(new SupportListener());
 

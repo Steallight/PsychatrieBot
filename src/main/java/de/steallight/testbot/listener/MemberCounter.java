@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.events.guild.member.GuildMemberRemoveEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class MemberCounter extends ListenerAdapter {
-    String memberChannel = "805190586554253393";
+    String memberChannel = "805189806639284234";
 
     @Override
     public void onGuildMemberJoin(GuildMemberJoinEvent e) {
@@ -24,6 +24,7 @@ public class MemberCounter extends ListenerAdapter {
     @Override
     public void onGuildMemberRemove(GuildMemberRemoveEvent e) {
         int members = e.getGuild().getMemberCount();
+
 
         VoiceChannel vc = e.getGuild().getVoiceChannelById(memberChannel);
         if (vc != null) {
