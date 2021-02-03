@@ -92,6 +92,7 @@ public static TextChannel tc;
         }
         new TwitchListener(twitchClient, this);
         shardMan.addEventListener(new GuildMessageReceivedListener(this.handler));
+        shardMan.addEventListener(new EmoteIdeaListener());
         shardMan.addEventListener(new IdeenListener());
 
         shardMan.addEventListener(new ReactionListener());
