@@ -101,6 +101,7 @@ public static TextChannel tc;
         shardMan.addEventListener(new VoiceListener());
 
         shardMan.addEventListener(new MemberCounter());
+        shardMan.addEventListener(new BoostListener());
 
 
         //   shardMan.addEventListener(new SupportListener());
