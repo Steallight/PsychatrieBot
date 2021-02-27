@@ -9,7 +9,7 @@ public class EmoteIdeaListener extends ListenerAdapter {
 
 
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
-        if (e.getChannel().getId().equals("")) {
+        if (e.getChannel().getId().equals("804790473016737799")) {
             e.getMessage().addReaction("\u2705").queue();
         }
     }

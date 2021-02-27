@@ -20,6 +20,8 @@ public class BoostListener extends ListenerAdapter {
             eb.setTitle("Der Server wurde geboosted!");
             eb.setColor(Color.decode("#FF68BE"));
             eb.addField("Wer?", boostMember.getAsMention(), false);
+            eb.addField("Wie oft?", e.getNewValue().toString(), false);
+            eb.setImage("https://tenor.com/bhncy.gif");
             eb.setThumbnail(boostMember.getUser().getAvatarUrl());
 
             tc.sendMessage(eb.build()).queue();
