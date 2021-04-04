@@ -28,18 +28,17 @@ public class ActivityManager {
                 public void run() {
                     switch (this.currentRoutinePosition) {
                         case 0:
-                            bot.shardMan.setPresence(OnlineStatus.DO_NOT_DISTURB, Activity.playing("programmieren"));
-                            this.currentRoutinePosition ++;
+                            Bot.shardMan.setPresence(OnlineStatus.DO_NOT_DISTURB, Activity.playing("Rocket League"));
+                            this.currentRoutinePosition++;
                             break;
                         case 1:
-                            bot.shardMan.setPresence(OnlineStatus.DO_NOT_DISTURB, Activity.watching("Chats an"));
-                            this.currentRoutinePosition ++;
+                            Bot.shardMan.setPresence(OnlineStatus.DO_NOT_DISTURB, Activity.watching("Chats an"));
+                            this.currentRoutinePosition++;
                             break;
                         case 2:
-                            bot.shardMan.setPresence(OnlineStatus.DO_NOT_DISTURB, Activity.listening("auf -> !"));
+                            Bot.shardMan.setPresence(OnlineStatus.DO_NOT_DISTURB, Activity.listening("auf -> !"));
                             this.currentRoutinePosition = 0;
                             break;
-
 
 
                     }

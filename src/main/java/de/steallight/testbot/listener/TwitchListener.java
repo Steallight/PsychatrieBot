@@ -22,9 +22,9 @@ public class TwitchListener extends ListenerAdapter {
     private final Cache<String, Boolean> recentlyOffline = Caffeine.newBuilder().expireAfterWrite(15, TimeUnit.MINUTES).build();
     ScheduledExecutorService executor = Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors());
     UserList resultList = Bot.twitchClient.getHelix().getUsers(null, null, Arrays.asList("steallight")).execute();
-
-
-private String twitch = "https://twitch.tv/";
+    private final String twitch = "https://twitch.tv/";
+    public long liveMsg1;
+    public long liveMsg2;
     private final Bot bot;
 
     public TwitchListener(TwitchClient twitchClient, Bot bot) {
@@ -32,7 +32,6 @@ private String twitch = "https://twitch.tv/";
         twitchClient.getEventManager().onEvent(ChannelGoLiveEvent.class, this::handleChannelGoLiveEvent);
         twitchClient.getEventManager().onEvent(ChannelGoOfflineEvent.class, this::handleChannelGoOfflineEvent);
     }
-
 
     public void handleChannelGoLiveEvent(ChannelGoLiveEvent event) {
 
@@ -58,19 +57,32 @@ private String twitch = "https://twitch.tv/";
 
                 try {
 
-
-                    tc.sendMessage(tc.getGuild().getPublicRole().getAsMention() + " " + event.getChannel().getName() + " ist jetzt live. Schaut alle rein!").queueAfter(5, TimeUnit.SECONDS);
-                    tc.sendMessage(eb.build()).queue();
-
+                    if (tc != null) {
+                        tc.sendMessage(tc.getGuild().getPublicRole().getAsMention() + " " + event.getChannel().getName() + " ist jetzt live. Schaut alle rein!").queue(message -> {
+                            liveMsg1 = message.getIdLong();
+                        });
+                        tc.sendMessage(eb.build()).queue(message -> {
+                            liveMsg2 = message.getIdLong();
+                        });
+                    }
                 } catch (NullPointerException e) {
                     e.printStackTrace();
+
                 }
             }, 2, TimeUnit.MINUTES);
 
         }
 
     }
-    public void handleChannelGoOfflineEvent(ChannelGoOfflineEvent event){
+
+    public void handleChannelGoOfflineEvent(ChannelGoOfflineEvent event) {
         recentlyOffline.put(event.getChannel().getId(), true);
+        TextChannel tc = Bot.shardMan.getTextChannelById(780067626051043332L);
+        if (tc != null) {
+            tc.deleteMessageById(liveMsg1).queue();
+            tc.deleteMessageById(liveMsg2).queue();
+        } else {
+            System.out.println("Channel nicht verfügbar");
+        }
     }
 }

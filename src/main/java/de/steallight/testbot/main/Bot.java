@@ -116,6 +116,7 @@ public static TextChannel tc;
         handler.registerCommand(new socials());
         handler.registerCommand(new PurgeCMD());
 
+
         this.handler.registerCommand(new React());
         this.handler.registerCommand(new Hi());
 
