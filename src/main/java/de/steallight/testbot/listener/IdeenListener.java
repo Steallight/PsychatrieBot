@@ -23,6 +23,7 @@ public class IdeenListener extends ListenerAdapter {
         User member = e.getMessage().getAuthor();
         if (e.getChannel().getId().equals("780067626486857750")) {
             if (Objects.requireNonNull(e.getMember()).getUser().isBot()) {
+
             } else {
 
 
