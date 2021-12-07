@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class VoiceListener extends ListenerAdapter {
-    private final static long joinChannel = 782396014568144918L;
+    private final static long joinChannel = 774649165300105256L;
     private final List<Long> tempChannels = new ArrayList<>();
 
     @Override

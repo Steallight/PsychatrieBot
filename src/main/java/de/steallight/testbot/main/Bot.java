@@ -60,6 +60,7 @@ public static TextChannel tc;
                 GatewayIntent.GUILD_MESSAGE_REACTIONS
 
 
+
         )
                 .enableCache(
                         CacheFlag.VOICE_STATE,
