@@ -36,13 +36,9 @@ public static TextChannel tc;
         INSTANCE = this;
         this.handler = new CommandHandler();
         this.activityManager = new ActivityManager(this);
+        LiteSQL.connect();
+        SQLManager.onCreate();
 
-     twitchClient = TwitchClientBuilder.builder()
-                .withClientId(CodeStorage.TwitchClientID)
-                .withClientSecret(CodeStorage.TwitchSecret)
-                .withEnableHelix(true)
-
-                .build();
 
         twitchClient.getClientHelper().enableStreamEventListener("steallight");
 
@@ -95,6 +91,7 @@ public static TextChannel tc;
         shardMan.addEventListener(new GuildMessageReceivedListener(this.handler));
         shardMan.addEventListener(new EmoteIdeaListener());
         shardMan.addEventListener(new IdeenListener());
+        shardMan.addEventListener(new ReactionAddEvent());
 
         shardMan.addEventListener(new ReactionListener());
         shardMan.addEventListener(new JoinListener());
@@ -109,7 +106,8 @@ public static TextChannel tc;
 
         this.handler.registerCommand(new delchannel());
         this.handler.registerCommand(new Help());
-
+        this.handler.registerCommand(new TicketMessage());
+        this.handler.registerCommand(new StaffNotify());
 
         handler.registerCommand(new devCMD());
         handler.registerCommand(new stream());
