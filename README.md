@@ -6,7 +6,7 @@ Er beinhaltet:
   - Emote Ideen System
   - sauberes Supportsystem mit VC's
   - Ticket Support kommt noch hinzu (LiteSQL)
-  - Twitch Stream Annoucments
+  - Twitch Stream Annoucments(Outdated)
   - viele Nachrichten schnell löschen (clear Befehl)
   - Help-Befehl
   - Announcement Befehl
